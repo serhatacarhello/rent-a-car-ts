@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { ICarProps } from "../../../../types";
+import generateImage from "../../../../utils/generateImage";
 
 type PropTypes = {
   isOpen: boolean;
@@ -11,10 +12,6 @@ export default function Modal(props: PropTypes) {
   // console.log("🚀 ~ file: index.tsx:10 ~ Modal ~ car:", car);
 
   const car_object_entries = Object.entries(car);
-  console.log(
-    "🚀 ~ file: index.tsx:18 ~ Modal ~ car_object_entries:",
-    car_object_entries
-  );
 
   const carElements = useMemo(() => {
     return car_object_entries.map(([key, value]) => (
@@ -49,29 +46,29 @@ export default function Modal(props: PropTypes) {
               <div className="car-details__main-image">
                 <img
                   className=" car-details_dialog-img"
-                  src="/hero.png"
+                  src={generateImage(car, "angle")}
                   alt=""
                 />
               </div>
               {/* angle images */}
-              <div className="flex">
-                <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg-100">
+              <div className="flex mt-3">
+                <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg ">
                   <img
-                    src="/hero.png"
+                    src={generateImage(car, "29")}
                     className="car-details_dialog-img"
                     alt=""
                   />
                 </div>
                 <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg-100">
                   <img
-                    src="/hero.png"
-                    className="car-details_dialog-img"
+                    src={generateImage(car, "33")}
+                    className="car-details_dialog-img mt-4"
                     alt=""
                   />
                 </div>
                 <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg-100">
                   <img
-                    src="/hero.png"
+                    src={generateImage(car, "13")}
                     className="car-details_dialog-img"
                     alt=""
                   />

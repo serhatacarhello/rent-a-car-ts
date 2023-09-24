@@ -1,19 +1,16 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { makes } from "../../constants";
 import { IOption } from "../../types";
 import SearchButton from "./SearchButton";
 import Select from "react-select";
 import { useSearchParams } from "react-router-dom";
+import Notification from "../Notification";
 
 export default function SearchBar() {
-  const [make, setMake] = useState<string>("Toyota");
-  const [model, setModel] = useState<string>("Corolla");
+  const [make, setMake] = useState<string>("");
+  const [model, setModel] = useState<string>("");
 
-  const [URLSearchParams, SetURLSearchParams] = useSearchParams();
-  console.log(
-    "🚀 ~ file: index.tsx:13 ~ SearchBar ~ URLSearchParams:",
-    URLSearchParams
-  );
+  let [searchParams, setSearchParams] = useSearchParams();
 
   const options: IOption[] = useMemo(() => {
     return makes.map((makes) => ({
@@ -28,14 +25,19 @@ export default function SearchBar() {
     e.preventDefault();
     console.log("make, model", make, model);
     if (make !== "" && model === "") {
-      SetURLSearchParams({ make: make.toLocaleLowerCase() });
+      setSearchParams({ make: make.toLocaleLowerCase() });
     } else if (make !== "" && model !== "") {
-      SetURLSearchParams({
+      setSearchParams({
         make: make.toLocaleLowerCase(),
         model: model.toLocaleLowerCase(),
       });
+    } else {
+      return (
+        <Notification text="Lütfen marka ve model seçiniz." variant="red" />
+      );
     }
   };
+
   return (
     <form onSubmit={handleSubmit} className="searchbar gap-3">
       {/* make select field */}
@@ -44,7 +46,8 @@ export default function SearchBar() {
           className="w-full"
           options={options}
           closeMenuOnSelect={false}
-          defaultValue={options[38]}
+          // defaultValue={options[38]}
+          placeholder="Toyota"
           // isMulti
           // styles={""}
           onChange={(e: IOption | null) => setMake(e!.value)}
@@ -63,7 +66,7 @@ export default function SearchBar() {
           type="text"
           value={model}
           className="searchbar__input text-black rounded  "
-          defaultValue={"Corolla"}
+          placeholder="Corolla"
           onChange={(e) => setModel(e.target.value)}
         />
         <SearchButton designs="sm:hidden" />

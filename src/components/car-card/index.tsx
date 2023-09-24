@@ -1,5 +1,6 @@
 import { ICarProps } from "../../types";
 import calculateDailyRentalPrice from "../../utils/calculateRentalPrice";
+import generateImage from "../../utils/generateImage";
 import CarCardFooter from "./car-card-footer";
 
 interface ICarCardProps {
@@ -8,7 +9,7 @@ interface ICarCardProps {
 
 export default function CarCard(props: ICarCardProps) {
   const { car } = props;
-  console.log("🚀 ~ file: index.tsx:9 ~ CarCard ~ car:", car);
+  // console.log("🚀 ~ file: index.tsx:9 ~ CarCard ~ car:", car);
   return (
     <div className="car-card group">
       <div className="car-card__content">
@@ -22,7 +23,7 @@ export default function CarCard(props: ICarCardProps) {
         </p>
       </div>
       <div className="car-card__image">
-        <img src="/public/hero.png" alt={`${car.make} ${car.model} image`} />
+        <img src={generateImage(car)} alt={`${car.make} ${car.model} image`} />
       </div>
       <CarCardFooter car={car} />
     </div>

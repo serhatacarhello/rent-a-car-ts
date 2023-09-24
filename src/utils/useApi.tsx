@@ -5,7 +5,8 @@ const url = "https://cars-by-api-ninjas.p.rapidapi.com/v1";
 const options = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "121f897c0cmsh80850168403bfbap1168e4jsn5664b7932b70",
+    "X-RapidAPI-Key": "4ddad72d67msh97b8e38b8b2bba6p16e1b6jsn8fc74408a3b2",
+    // "X-RapidAPI-Key": "121f897c0cmsh80850168403bfbap1168e4jsn5664b7932b70",
     "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
   },
 };

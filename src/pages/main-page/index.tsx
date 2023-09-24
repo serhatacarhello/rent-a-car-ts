@@ -1,13 +1,36 @@
+import { useSearchParams } from "react-router-dom";
 import Hero from "../../components/Hero";
 import CarCard from "../../components/car-card";
 import CustomFilters from "../../components/filter/CustomFilters";
 import SearchBar from "../../components/searc-bar";
 import useApi from "../../utils/useApi";
 
-export default function MainPage() {
-  const { isLoading, data } = useApi(`cars?model=corolla`);
+const defaultParams = {
+  make: "Toyota",
+  model: "",
+  year: "",
+  fuel: "",
+  limit: "5",
+};
 
-  if (!isLoading) console.log("mainpage data", data);
+export default function MainPage() {
+  const [searchParams] = useSearchParams();
+
+  const paramsObj = Object.fromEntries(searchParams);
+  console.log("🚀 ~ file: index.tsx:11 ~ MainPage ~ paramsObj:", paramsObj);
+
+  const actualParams = {
+    ...defaultParams,
+    ...paramsObj,
+  };
+
+  const { make, model, fuel, year, limit } = actualParams;
+
+  const queryString = `make=${make}&model=${model}&fuel=${fuel}&year=${year}&limit=${limit}`;
+
+  const { isLoading, data } = useApi(`cars?${queryString}`);
+
+  if (!isLoading) console.log("mainpage fetch cars data", data);
 
   // check for data is array or is  empty or is null
   const isDataEmpty: boolean = !Array.isArray(data) || data.length < 1 || !data;
