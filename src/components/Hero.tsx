@@ -28,13 +28,12 @@ export default function Hero() {
         <motion.img
           // whileHover={{ scale: 1.2 }}
           // whileTap={{ scale: 0.8 }}
-          initial={{ opacity: 0.8, translateX: 200 }}
-          whileInView={{ opacity: 1, translateX: -20 }}
-          transition={{ duration: 0.5 }}
-          style={{ x: 100 }}
+          initial={{ x: 300, y: -50 }}
+          whileInView={{ x: 0, y: 0 }}
+          transition={{ duration: 2 }}
           src="/hero.png"
           alt="hero logo image"
-          className="img-fluid object-contain"
+          className="object-contain flex-1 max-w-[800px]"
         />
       </div>
     </div>
