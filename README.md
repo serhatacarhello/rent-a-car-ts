@@ -43,61 +43,6 @@ Kurulum:
 ```
 npm install axios
 ```
-
-# Kullanım
-
-Kütüphaneler npm yoluyla kurulduktan sonra projede şu şekilde kullanılabilir:
-
-- React-select: ...
-- Framer-motion: ...
-- Tailwindcss: ...
-- Axios: ...
-React-select, framer-motion, tailwindcss ve axios kütüphaneleri için bir README dosyası örneği:
-
-# Kullanılan Kütüphaneler
-
-Bu projede şu kütüphaneler kullanılmıştır:
-
-## react-select
-
-Select bileşenleri oluşturmak için kullanılan bir React kütüphanesi.
-
-Kurulum:
-
-```
-npm install react-select
-```
-
-## framer-motion
-
-Animasyonlar eklemek için kullanılan bir React kütüphanesi.
-
-Kurulum:
-
-```
-npm install framer-motion
-```
-
-## tailwindcss
-
-Utility-first CSS framework. Classname tabanlı stil tanımlamak için kullanılıyor.
-
-Kurulum:
-
-```
-npm install -D tailwindcss
-npx tailwindcss init
-```
-
-## axios
-
-API istekleri için kullanılan bir JS kütüphanesi.
-
-Kurulum:
-
-```
-npm install axios
-```
 # react-router-dom
 
 React uygulamalarında routing işlemleri için kullanılan bir kütüphane.
