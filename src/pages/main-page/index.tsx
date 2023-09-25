@@ -4,17 +4,20 @@ import CarCard from "../../components/car-card";
 import CustomFilters from "../../components/filter/CustomFilters";
 import SearchBar from "../../components/searc-bar";
 import useApi from "../../utils/useApi";
+import { fuels, transmissions, years } from "../../constants";
+import ShowMore from "../../components/show-more";
 
 const defaultParams = {
   make: "Toyota",
   model: "",
   year: "",
-  fuel: "",
+  fuel_type: "",
   limit: "5",
+  transmission: "",
 };
 
 export default function MainPage() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const paramsObj = Object.fromEntries(searchParams);
   console.log("🚀 ~ file: index.tsx:11 ~ MainPage ~ paramsObj:", paramsObj);
@@ -24,9 +27,9 @@ export default function MainPage() {
     ...paramsObj,
   };
 
-  const { make, model, fuel, year, limit } = actualParams;
+  const { make, model, fuel_type, year, limit, transmission } = actualParams;
 
-  const queryString = `make=${make}&model=${model}&fuel=${fuel}&year=${year}&limit=${limit}`;
+  const queryString = `make=${make}&model=${model}&fuel_type=${fuel_type}&year=${year}&limit=${limit}&transmission=${transmission}`;
 
   const { isLoading, data } = useApi(`cars?${queryString}`);
 
@@ -45,20 +48,38 @@ export default function MainPage() {
       >
         <div className="home__text-container">
           <h1 className="text-4xl font-extrabold">Araba Katalogu</h1>
-          <p>Beğenebilecegin arabaları keşfet</p>
+          <p>Beğenebileceğin arabaları keşfet</p>
         </div>
         <div className="home__filters">
           {/* search bar */}
-          <SearchBar />
-
+          <SearchBar
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
+          />
           <div className="home__filter-container">
-            <CustomFilters />
-            <CustomFilters />
+            <CustomFilters
+              title={"Yakıt tipi"}
+              options={fuels}
+              searchParams={searchParams}
+              setSearchParams={setSearchParams}
+            />
+
+            <CustomFilters
+              title={"Üretim yılı"}
+              options={years}
+              searchParams={searchParams}
+              setSearchParams={setSearchParams}
+            />
+            <CustomFilters
+              title={"Vites tipi"}
+              options={transmissions}
+              searchParams={searchParams}
+              setSearchParams={setSearchParams}
+            />
           </div>
         </div>
 
-        {/* cars field */}
-        <div className="filter-field">filter field</div>
+        {/* cars filter result field */}
         <div className="cars-field">
           {isDataEmpty ? (
             <div className="home__error-container">
@@ -72,6 +93,7 @@ export default function MainPage() {
                     <CarCard key={i} car={car} />
                   ))}
                 </div>
+                <ShowMore limit={limit} isNext={Number(limit) < 30} />
               </section>
             </>
           )}

@@ -17,7 +17,7 @@ interface ApiResponse {
 }
 
 const useApi = (endpoint: string): ApiResponse => {
-  console.log("useapi calıştı");
+  console.log("useapi calıştı", endpoint);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<ICarProps[]>([]);
 

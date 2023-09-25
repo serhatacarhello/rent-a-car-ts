@@ -12,7 +12,7 @@ export default function CarCardFooter(props: IPropTypes) {
 
   const { car } = props;
   return (
-    <div className="relative flex w-full mt-2">
+    <div className="relative flex w-full mt-10">
       <div className="car-card__icon-container">
         <CarInfoIcon
           title={car.transmission === "a" ? "Otomatik" : "Manuel"}
@@ -32,7 +32,7 @@ export default function CarCardFooter(props: IPropTypes) {
       <div className="car-card__btn-container">
         <CustomButton
           text="Daha fazla"
-          design="w-full py-[16px] bg-primary-blue text-white hover:bg-blue-800"
+          design="absolute -bottom-2.5 w-full py-[16px] bg-primary-blue text-white hover:bg-blue-800"
           rightIcon="/right-arrow.svg"
           handleClick={() => setIsOpen(true)}
         />

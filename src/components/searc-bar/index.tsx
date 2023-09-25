@@ -3,14 +3,16 @@ import { makes } from "../../constants";
 import { IOption } from "../../types";
 import SearchButton from "./SearchButton";
 import Select from "react-select";
-import { useSearchParams } from "react-router-dom";
 import Notification from "../Notification";
 
-export default function SearchBar() {
+type PropsTypes = {
+  searchParams: URLSearchParams;
+  setSearchParams: (nextSearchParams: URLSearchParams) => void;
+};
+export default function SearchBar(props: PropsTypes) {
+  const { searchParams, setSearchParams } = props;
   const [make, setMake] = useState<string>("");
   const [model, setModel] = useState<string>("");
-
-  let [searchParams, setSearchParams] = useSearchParams();
 
   const options: IOption[] = useMemo(() => {
     return makes.map((makes) => ({
@@ -25,17 +27,22 @@ export default function SearchBar() {
     e.preventDefault();
     console.log("make, model", make, model);
     if (make !== "" && model === "") {
-      setSearchParams({ make: make.toLocaleLowerCase() });
+      searchParams.set("make", make.toLocaleLowerCase());
+      // setSearchParams({ make: make.toLocaleLowerCase() });
     } else if (make !== "" && model !== "") {
-      setSearchParams({
-        make: make.toLocaleLowerCase(),
-        model: model.toLocaleLowerCase(),
-      });
+      searchParams.set("make", make.toLocaleLowerCase());
+      searchParams.set("model", model.toLocaleLowerCase());
+      // setSearchParams({
+      //   make: make.toLocaleLowerCase(),
+      //   model: model.toLocaleLowerCase(),
+      // });
     } else {
       return (
         <Notification text="Lütfen marka ve model seçiniz." variant="red" />
       );
     }
+
+    setSearchParams(searchParams);
   };
 
   return (
